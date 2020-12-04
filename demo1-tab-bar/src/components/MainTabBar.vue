@@ -1,31 +1,31 @@
 <template>
   <tab-bar>
     <!-- item1 -->
-    <tab-bar-item path="/home">
+    <tabBarItem path="/home">
       <template #img> <img src="~assets/img/tabbar/home.svg" /> </template>
       <template #img-active>
         <img src="~assets/img/tabbar/home_active.svg"
       /></template>
       <template #item-name> <div>首页</div> </template>
-    </tab-bar-item>
+    </tabBarItem>
     <!-- item2 -->
-    <tab-bar-item path="/category">
+    <tabBarItem path="/category">
       <template #img> <img src="~assets/img/tabbar/category.svg" /> </template>
       <template #img-active>
         <img src="~assets/img/tabbar/category_active.svg"
       /></template>
       <template #item-name> <div>分类</div> </template>
-    </tab-bar-item>
+    </tabBarItem>
     <!-- item3 -->
-    <tab-bar-item path="/shopcart">
+    <tabBarItem path="/shopcart">
       <template #img> <img src="~assets/img/tabbar/shopcart.svg" /></template>
       <template #img-active>
-        <img src="~assets/img/tabbar/shopcart_active.svg"/
-      ></template>
+        <img src="~assets/img/tabbar/shopcart_active.svg"/>
+      </template>
       <template #item-name> <div>购物车</div> </template>
-    </tab-bar-item>
+    </tabBarItem>
     <!-- item4 -->
-    <tab-bar-item path="/profile">
+    <tabBarItem path="/profile">
       <template #img>
         <img src="~assets/img/tabbar/profile.svg" />
       </template>
@@ -33,7 +33,7 @@
         <img src="~assets/img/tabbar/profile_active.svg"
       /></template>
       <template #item-name> <div>我的</div> </template>
-    </tab-bar-item>
+    </tabBarItem>
   </tab-bar>
 </template>
 
