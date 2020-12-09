@@ -1,17 +1,12 @@
 <template>
   <div>
-    <hello/>
+    cart
   </div>
 </template>
 
 <script>
-import Hello from 'components/Hello'
 export default {
-  components:
-  
-  {
-    Hello
-  }
+  name:'cart'
 }
 </script>
 

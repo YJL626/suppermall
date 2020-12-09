@@ -1,17 +1,13 @@
 <template>
   <div>
-    <hello/>
+    profile
   </div>
 </template>
 
 <script>
-import Hello from 'components/Hello'
 export default {
-  components:
-  
-  {
-    Hello
-  }
+  name:'Profile'
+
 }
 </script>
 

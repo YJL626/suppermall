@@ -6,10 +6,10 @@
 </template>
 
 <script>
-import mainTabBar from 'components/MainTabBar.vue'
+import mainTabBar from "components/MainTabBar.vue";
 export default {
   components: {
-    mainTabBar
+    mainTabBar,
   },
 };
 </script>

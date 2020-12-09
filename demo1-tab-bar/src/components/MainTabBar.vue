@@ -1,5 +1,6 @@
 <template>
-  <tab-bar>
+  <keep-alive>
+      <tab-bar>
     <!-- item1 -->
     <tabBarItem path="/home">
       <template #img> <img src="~assets/img/tabbar/home.svg" /> </template>
@@ -35,6 +36,7 @@
       <template #item-name> <div>我的</div> </template>
     </tabBarItem>
   </tab-bar>
+  </keep-alive>
 </template>
 
 <script>
