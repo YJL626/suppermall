@@ -32,6 +32,7 @@ export default {
 
 .GoodsListItem {
   width: 47%;
+  padding-bottom: 12px;
   img {
     border-radius: 5px;
   }
@@ -50,7 +51,6 @@ export default {
     p {
       width: 100%;
     }
-
     .cfav {
       position: relative;
       display: inline-block;
