@@ -3,7 +3,7 @@
     <GoodsListItem
       :goods="item"
       v-for="item in goodsList.list"
-      :key="item.title"
+      :key=" Math.random() "
     ></GoodsListItem>
   </div>
 </template>
@@ -30,13 +30,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "assets/css/variable.scss";
+@import 'assets/css/variable.scss';
 .GoodsList {
   width: 99%;
   padding: 0.5%;
   display: flex;
   flex-wrap: wrap;
-  font-size: $font-size;
+  font-size: $font-size ;
   justify-content: space-around;
 }
 </style>
