@@ -1,10 +1,11 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import Home from 'views/home/Home'
 
-const Home = () => import('views/home/Home')
 const Category = () => import('views/category/Category')
 const ShopCart = () => import('views/shopcart/ShopCart')
 const Profile = () => import('views/profile/Profile')
+const Details = () => import('views/details/Details')
 Vue.use(VueRouter)
 
 const routes = [
@@ -27,6 +28,10 @@ const routes = [
   {//Profile
     path: '/profile',
     component: Profile
+  },
+  {//details
+    path: '/details/:iid',
+    component: Details
   }
 ]
 

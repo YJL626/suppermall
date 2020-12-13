@@ -37,7 +37,7 @@
           />
         </template>
         <template #itemName>
-          <span>设置</span>
+          <span>购物车</span>
         </template>
       </TabBarItem>
 
@@ -51,7 +51,7 @@
           />
         </template>
         <template #itemName>
-          <span>设置</span>
+          <span>我的</span>
         </template>
       </TabBarItem>
     </TabBar>
@@ -71,7 +71,4 @@ export default {
 </script>
 
 <style>
-#MainTabBar {
-  height: 49px;
-}
 </style>

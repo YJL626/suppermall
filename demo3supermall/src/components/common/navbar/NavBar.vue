@@ -23,9 +23,8 @@ export default {
 #navBar{
   height: 44px;
   .navBar {
-  position: fixed;
-  z-index: 9999;
-  width: 100%;
+  position: relative;
+  z-index: 9;
   display: flex;
   height: 44px;
   line-height: 44px;

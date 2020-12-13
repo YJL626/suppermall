@@ -4,7 +4,7 @@
 
     <div v-else><slot name="imgActive"></slot></div>
 
-    <div :class="{active:isActive}"><slot name="itemName"></slot></div>
+    <div :class="{ active: isActive }"><slot name="itemName"></slot></div>
   </li>
 </template>
 
@@ -16,20 +16,17 @@ export default {
     },
   },
   data() {
-    return {
-      
-    };
+    return {};
   },
-  computed:{
-    isActive(){
-      
-      return this.$route.fullPath.includes(this.path)
-    }
+  computed: {
+    isActive() {
+      return this.$route.fullPath.includes(this.path);
+    },
   },
   methods: {
     skipPath() {
-      if(this.$route.fullPath === '/'+this.path)return
-      this.$router.replace(this.path);
+      if (this.$route.fullPath === "/" + this.path) return;
+      this.$router.replace({ path: "/" + this.path });
     },
   },
 };
@@ -39,6 +36,8 @@ export default {
 @import "assets/css/variable.scss";
 .tabBarItem {
   flex: 1 1 0;
+  box-sizing: content-box;
+  padding: 2px 0;
   text-align: center;
   font-size: $font-size;
   img {

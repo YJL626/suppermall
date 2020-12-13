@@ -1,5 +1,10 @@
 <template>
-  <div id="carousel" @touchstart="touchstart" @touchmove="touchmove" @touchend="touchend">
+  <div
+    id="carousel"
+    @touchstart="touchstart"
+    @touchmove="touchmove"
+    @touchend="touchend"
+  >
     <div class="slider">
       <slot></slot>
     </div>
@@ -95,18 +100,27 @@ export default {
         this.carouselInit();
       }, (this.initInterval += 3000));
       const slider = document.querySelector("#carousel > .slider");
-      const first = document
-        .querySelector("#carousel > .slider > div:first-child")
-        .cloneNode(true);
-      const last = document
-        .querySelector("#carousel > .slider > div:last-child")
-        .cloneNode(true);
+      const first =
+        document.querySelector("#carousel > .slider > div:first-child") &&
+        document
+          .querySelector("#carousel > .slider > div:first-child")
+          .cloneNode(true);
+      const last =
+        document.querySelector("#carousel > .slider > div:last-child") &&
+        document
+          .querySelector("#carousel > .slider > div:last-child")
+          .cloneNode(true);
       const slides = document.getElementsByClassName("slide");
       //获取banner数量，宽度
       this.bannerCount = slides.length;
-      this.imgWidth = document.querySelector("#carousel>.slider img").offsetWidth;
-      //获取数据，有一项为null则return//获取成功取消定时器
+      this.imgWidth =
+        document.querySelector("#carousel>.slider img") &&
+        document.querySelector("#carousel>.slider img").offsetWidth;
+      //获取数据，有一项为null则return
       if (!first || !last || !this.imgWidth) return;
+      //发送事件，img已加载完成
+      if (this.$bus) this.$bus.$emit("carousel-load");
+      //获取成功取消定时器
       clearTimeout(this.initTimer);
 
       //插入数据
@@ -166,7 +180,10 @@ export default {
         //更新现有img坐标
         this.currentIMG = -this.currentOffset / this.imgWidth; //
         //达到目的地设置下次。
-        this.autoMoveTimer = setTimeout(() => this.nextPage(), this.animationInterval);
+        this.autoMoveTimer = setTimeout(
+          () => this.nextPage(),
+          this.animationInterval
+        );
         return;
       }
       this.moveTimer = setTimeout(
@@ -194,7 +211,10 @@ export default {
       this.setChange(this.currentOffset);
       this.currentIMG = index;
       //启动定时器
-      this.autoMoveTimer = setTimeout(() => this.nextPage(), this.animationInterval);
+      this.autoMoveTimer = setTimeout(
+        () => this.nextPage(),
+        this.animationInterval
+      );
     },
     touchstart(event) {
       if (this.moveTimer && !this.init) return;

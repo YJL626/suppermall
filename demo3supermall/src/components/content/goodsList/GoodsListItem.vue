@@ -1,6 +1,11 @@
 <template>
-  <div class="GoodsListItem">
-    <img :src="goods.show.img" alt="" />
+  <div class="GoodsListItem" @click="skipToDetails(goods.iid)">
+    <img
+      :src="goods.show.img"
+      alt=""
+      ref="img"
+      @load="$bus.$emit('img-load')"
+    />
     <div class="details">
       <p class="title">{{ goods.title }}</p>
       <!--     <img src="~assets/img/common/collect.svg" alt=""> -->
@@ -17,13 +22,18 @@ export default {
   data() {
     return {};
   },
+  created() {},
   props: {
     goods: {
       reqiured: true,
     },
   },
   computed: {},
-  methods: {},
+  methods: {
+    skipToDetails(iid) {
+      this.$router.push("details/" + iid);
+    },
+  },
 };
 </script>
 
@@ -47,8 +57,10 @@ export default {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    margin: 8px auto 10px auto;
     p {
       width: 100%;
+      padding-bottom: 3px;
     }
 
     .cfav {

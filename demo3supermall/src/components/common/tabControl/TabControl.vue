@@ -28,7 +28,7 @@ export default {
   methods: {
     changeCurrentIndex(index) {
       this.currentIndex = index;
-      this.$emit("tabchange", index);
+      this.$emit("tab-change", index);
     },
   },
 };
@@ -39,7 +39,6 @@ export default {
 
 .tabControl {
   display: flex;
-
   justify-content: space-around;
   height: 45px;
 
