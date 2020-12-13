@@ -1,12 +1,12 @@
 <template>
-  <div class="GoodsListItem" @click="skipToDetails(goods.iid)">
+  <div class="GoodsListItem" @click="skipToDetail(goods.iid)">
     <img
       :src="goods.show.img"
       alt=""
       ref="img"
       @load="$bus.$emit('img-load')"
     />
-    <div class="details">
+    <div class="detail">
       <p class="title">{{ goods.title }}</p>
       <!--     <img src="~assets/img/common/collect.svg" alt=""> -->
       <span class="price">{{ goods.price }}</span>
@@ -30,8 +30,8 @@ export default {
   },
   computed: {},
   methods: {
-    skipToDetails(iid) {
-      this.$router.push("details/" + iid);
+    skipToDetail(iid) {
+      this.$router.push("detail/" + iid);
     },
   },
 };
@@ -53,7 +53,7 @@ export default {
   .price {
     color: $color-price;
   }
-  .details {
+  .detail {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -81,7 +81,5 @@ export default {
   }
 }
 
-/* .price {
-  
-   */
+
 </style>

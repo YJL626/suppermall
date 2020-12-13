@@ -1,5 +1,5 @@
 <template>
-  <div class="slide">
+  <div class="slider">
     <slot></slot>
   </div>
 </template>
@@ -8,10 +8,10 @@
 export default {};
 </script>
 
-<style lang="scss">
-.slide {
-  img {
-    width: 100%;
+<style scoped lang="scss">
+.slider {
+  flex: 1 0 100%;
+  img{
   }
 }
 </style>

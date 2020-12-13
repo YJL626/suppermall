@@ -31,11 +31,11 @@ export default {
   box-shadow: 0 1px rgba($color: #5e5959, $alpha: 0.08);
   .left,
   .right {
-    width: 33px;
+    min-width: 33px;
+    width: 18vw;
   }
   .center {
     flex: 1 1 0;
-    vertical-align: middle;
     text-align: center;
   }
 }
