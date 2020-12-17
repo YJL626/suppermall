@@ -1,14 +1,14 @@
 <template>
   <NavBar>
     <template #left>
-      <div class="back" @click="$router.back()">
+      <div class="back" @click="$router.go(-1)">
         <img src="~assets/img/common/back.svg" alt="" />
       </div>
     </template>
     <template #center>
       <ul class="title-list">
         <li
-          @click="currentIndex = index"
+          @click="setCurrentIndex(index)"
           v-for="(item, index) in titleArr"
           :key="item"
           :class="{ active: currentIndex === index }"
@@ -35,6 +35,7 @@ export default {
   methods: {
     setCurrentIndex(index) {
       this.currentIndex = index;
+      this.$emit("nav-bar-click", index);
     },
   },
   components: {

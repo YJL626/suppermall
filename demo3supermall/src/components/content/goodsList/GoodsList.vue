@@ -2,8 +2,8 @@
   <div class="GoodsList">
     <GoodsListItem
       :goods="item"
-      v-for="item in goodsList.list"
-      :key=" Math.random() "
+      v-for="item in goodsList"
+      :key="item + Math.random()"
     ></GoodsListItem>
   </div>
 </template>
@@ -19,7 +19,7 @@ export default {
   },
   props: {
     goodsList: {
-      type: Object,
+      type: Array,
     },
   },
   methods: {},
@@ -30,13 +30,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import 'assets/css/variable.scss';
+@import "assets/css/variable.scss";
 .GoodsList {
-  width: 99%;
-  padding: 0.5%;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 1%;
   display: flex;
   flex-wrap: wrap;
-  font-size: $font-size ;
-  justify-content: space-around;
+  font-size: $font-size;
+  justify-content: center;
 }
 </style>

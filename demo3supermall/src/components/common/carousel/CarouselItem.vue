@@ -11,7 +11,5 @@ export default {};
 <style scoped lang="scss">
 .slider {
   flex: 1 0 100%;
-  img{
-  }
 }
 </style>

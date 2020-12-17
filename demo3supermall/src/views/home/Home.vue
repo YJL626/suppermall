@@ -1,6 +1,6 @@
 <template>
   <div id="home">
-    <BackTop v-show="isBackTopShow" @click.native="goTop" />
+    <BackTop v-show="showBack" @click.native="back" />
     <HomeNavBar />
     <TabControl
       :tabArr="['流行', '新款', '精选']"
@@ -15,6 +15,7 @@
       ref="scrollCPN"
       @scroll="checkScroll"
       @pullingUp="loadMore"
+      class="scroll"
     >
       <HomeCarousel :bannerArr="bannerArr" />
       <HomeRecommend :recommendArr="recommendArr" />
@@ -25,7 +26,7 @@
         @tab-change="tabChange"
         class="tab-control"
       />
-      <GoodsList :goodsList="goodsData[currentTab]" />
+      <GoodsList :goodsList="goodsData[currentTab].list" />
       <LoadingTip v-cloak v-show="tabControlOffsetTop" />
     </Scroll>
   </div>
@@ -40,18 +41,21 @@ import HomeFeature from "views/home/childComponents/HomeFeature";
 import TabControl from "components/common/tabControl/TabControl";
 
 import Scroll from "components/common/scroll/Scroll";
-import BackTop from "components/common/backTop/BackTop";
 import { GoodsList } from "components/content/goodsList/index";
 import LoadingTip from "components/common/loadingTip/LoadingTip";
 
-import { debounceWrap } from "components/common/utils.js";
 import {
   getHomeData as getData,
   getHomePopNewSell as getPopNewSell,
 } from "network/home";
 
+import { imgLoadListenerMixin } from "components/common/mixin/imgLoadListenerMixin.js";
+import { BackTopMixin } from "components/common/mixin/BackTopMixin.js";
+
+console.log(imgLoadListenerMixin);
 export default {
   name: "home",
+  mixins: [imgLoadListenerMixin, BackTopMixin],
   data() {
     return {
       /* 滚动配置 */
@@ -60,7 +64,6 @@ export default {
           top: false,
         },
         pullUpLoad: true,
-
         probeType: 2,
         //tap:'click',
         click: true,
@@ -74,7 +77,7 @@ export default {
         interactive: true,
       },
       /*  */
-      isBackTopShow: false,
+      showBack: false,
       isShowtopTabControl: false,
       tabControlOffsetTop: null,
 
@@ -92,7 +95,6 @@ export default {
     };
   },
   components: {
-    BackTop,
     HomeNavBar,
     Scroll,
     HomeCarousel,
@@ -107,29 +109,22 @@ export default {
     //检查坐标达到阈值
     checkScroll({ y }) {
       //检查坐标达到阈值显示backtop按钮
-      this.isBackTopShow = -y > this.$el.offsetHeight * 1.368;
+      this.checkBackShow(y, this.$el.offsetHeight * 1.368);
       //获取到阈值后,检查坐标达到阈值显示隐藏的tabcontrl
       if (this.tabControlOffsetTop) {
         this.isShowtopTabControl = -y > this.tabControlOffsetTop;
       }
     },
-    //返回最上级
-    goTop() {
-      this.$refs.scrollCPN.scrollTo();
-    },
+
     //加载完成之后给scrollcpm，一个回调
     async loadMore() {
       await this.getPopNewSellWrap(this.currentTab);
-      //数据加载完成后，2秒后才允许下次请求
+      //数据加载完成后，0.5秒后才允许下次请求
       setTimeout(() => {
         this.$refs.scrollCPN.finishPullUp();
-      }, 1500);
+      }, 500);
     },
-    //img加载完成刷新卷轴高度
-    refreshScroll() {
-      let refresh = debounceWrap(this.$refs.scrollCPN.refresh, 100, 3000); //vue的方法已经被bind绑定过this，直接包装就可以
-      this.$bus.$on("img-load", refresh);
-    },
+
     getScrollY() {
       return this.$refs.scrollCPN.getScrollY();
     },
@@ -181,16 +176,14 @@ export default {
     this.getPopNewSellWrap("sell");
   },
   mounted() {
-    this.refreshScroll();
     //初始化this.tabControlOffsetTop
-    this.$bus.$once(
-      "carousel-load",
-      () => (this.tabControlOffsetTop = this.$refs.HomeTabControl.$el.offsetTop)
-    );
+    this.$bus.$once("home-carousel-load", () => {
+      this.tabControlOffsetTop = this.$refs.HomeTabControl.$el.offsetTop;
+    });
   },
   activated() {
+    this.$refs.scrollCPN.refresh(); //scroll组件重新获取高度
     this.$refs.scrollCPN.scrollTo(0, this.scrollY, 0);
-    this.$refs.scrollCPN.refresh();
   },
   deactivated() {
     this.scrollY = this.getScrollY();
@@ -201,8 +194,18 @@ export default {
 <style scoped lang="scss">
 #home {
   height: 100vh;
+  width: 100vw;
   position: relative;
+  .scroll {
+    position: absolute;
+    top: 44px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+  }
 }
+
 .tab-control {
   position: relative;
   z-index: 9;

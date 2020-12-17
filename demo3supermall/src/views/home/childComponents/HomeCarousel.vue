@@ -3,7 +3,10 @@
     <Carousel>
       <CarouselItem v-for="item in bannerArr" :key="item.link">
         <a :href="item.link">
-          <img :src="item.image" />
+          <img
+            :src="item.image"
+            @load.once="$bus.$emit('home-carousel-load')"
+          />
         </a>
       </CarouselItem>
     </Carousel>

@@ -1,11 +1,6 @@
 <template>
-  <div class="GoodsListItem" @click="skipToDetail(goods.iid)">
-    <img
-      :src="goods.show.img"
-      alt=""
-      ref="img"
-      @load="$bus.$emit('img-load')"
-    />
+  <div class="GoodsListItem" @click="skipToDetail(goodsId)">
+    <img :src="imgSrc" alt="" ref="img" @load="$bus.$emit('img-load')" />
     <div class="detail">
       <p class="title">{{ goods.title }}</p>
       <!--     <img src="~assets/img/common/collect.svg" alt=""> -->
@@ -28,10 +23,18 @@ export default {
       reqiured: true,
     },
   },
-  computed: {},
+  computed: {
+    imgSrc() {
+      return this.goods.image || this.goods.show.img;
+    },
+    goodsId() {
+      return this.goods.iid || this.goods.item_id;
+    },
+  },
   methods: {
-    skipToDetail(iid) {
-      this.$router.push("detail/" + iid);
+    skipToDetail(goodsId) {
+      if (this.goods.item_id) return;
+      this.$router.push("/detail/" + goodsId);
     },
   },
 };
@@ -41,7 +44,9 @@ export default {
 @import "assets/css/variable.scss";
 
 .GoodsListItem {
-  width: 47%;
+  box-sizing: border-box;
+  width: 50%;
+  padding: 1%;
   img {
     border-radius: 5px;
   }
@@ -80,6 +85,4 @@ export default {
     }
   }
 }
-
-
 </style>

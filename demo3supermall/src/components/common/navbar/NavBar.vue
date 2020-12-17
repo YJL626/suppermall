@@ -20,24 +20,24 @@ export default {
 </script>
 
 <style lang='scss'>
-#navBar{
+#navBar {
   height: 44px;
   .navBar {
-  position: relative;
-  z-index: 9;
-  display: flex;
-  height: 44px;
-  line-height: 44px;
-  box-shadow: 0 1px rgba($color: #5e5959, $alpha: 0.08);
-  .left,
-  .right {
-    min-width: 33px;
-    width: 18vw;
+    position: relative;
+    z-index: 9;
+    display: flex;
+    height: 44px;
+    line-height: 44px;
+    box-shadow: 0 1px rgba($color: #5e5959, $alpha: 0.08);
+    .left,
+    .right {
+      min-width: 33px;
+      width: 18vw;
+    }
+    .center {
+      flex: 1 1 0;
+      text-align: center;
+    }
   }
-  .center {
-    flex: 1 1 0;
-    text-align: center;
-  }
-}
 }
 </style>

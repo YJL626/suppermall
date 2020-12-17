@@ -21,11 +21,11 @@ export default {
   width: 100vw;
   height: 49px;
   background-color: #f6f6f6;
-  position: fixed;
+  position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
-  z-index: 9999;
+  z-index: 2;
   display: flex;
   color: $color-test;
   justify-content: space-around;

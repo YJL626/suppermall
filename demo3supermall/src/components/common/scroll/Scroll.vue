@@ -13,7 +13,9 @@ export default {
   props: {
     config: {
       type: Object,
-      default: () => {},
+      default() {
+        return {};
+      },
     },
   },
   data() {
@@ -22,30 +24,31 @@ export default {
       imgFreshDebounce: null,
     };
   },
+  computed: {},
+  mounted() {
+    this.control = new BScroll(this.$refs.wrapper, this.config);
+    if (this.config.probeType) {
+      this.control.on("scroll", (positon) => this.$emit("scroll", positon));
+    }
+    //传出滚轮滚动时的坐标
+    if (this.config.mouseWheel) {
+      this.control.on("mousewheelMove", (positon) =>
+        this.$emit("scroll", positon)
+      );
+    }
+
+    
+
+    if (this.config.pullUpLoad) {
+      this.control.on("pullingUp", () => {
+        this.$emit("pullingUp");
+      });
+    }
+  },
   methods: {
     scrollTo(x = 0, y = 0, moveTime = 300) {
       this.control.scrollTo(x, y, moveTime);
     },
-  },
-  mounted() {
-    this.control = new BScroll(this.$refs.wrapper, this.config);
-
-    this.control.on("scroll", (positon) => {
-      //传出滑动坐标
-      this.$emit("scroll", positon);
-    });
-    this.control.on("mousewheelMove", (positon) => {
-      //传出滚轮滚动时的坐标
-      this.$emit("scroll", positon);
-    });
-    this.control.on("pullingUp", () => {
-      this.$emit("pullingUp");
-    });
-
-    //如果bus存在，
-    //内部img load完成向bus提交可冒泡的事件，接收到事件则刷新
-  },
-  methods: {
     //告诉控制器上拉结束
     finishPullUp() {
       this.control.finishPullUp();
@@ -58,6 +61,9 @@ export default {
     refresh() {
       this.control.refresh();
     },
+    scrollToElement(...arg) {
+      this.control.scrollToElement(...arg);
+    },
     getScrollY() {
       return this.control.y;
     },
@@ -69,12 +75,4 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.wrapper {
-  position: absolute;
-  top: 44px;
-  bottom: 49px;
-  right: 0;
-  left: 0;
-  overflow: hidden;
-}
 </style>
