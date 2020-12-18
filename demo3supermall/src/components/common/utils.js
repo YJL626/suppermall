@@ -1,5 +1,5 @@
 //防抖包装函数
-function debounceWrap(func, delay = 500, maxDelay = 2000) {
+export function debounceWrap(func, delay = 500, maxDelay = 2000) {
   let isRunning = null;
   let starTime = null;
   return function(...arg) {
@@ -17,7 +17,7 @@ function debounceWrap(func, delay = 500, maxDelay = 2000) {
   };
 }
 //格式化传入的时间戳data对象
-function formatDate(date, layout = "yyyy年MM月dd日") {
+export function formatDate(date, layout = "yyyy年MM月dd日") {
   date = typeof date === "object" ? date : new Date(date);
 
   if (Object.getPrototypeOf(date).constructor !== Date) return;
@@ -41,8 +41,38 @@ function formatDate(date, layout = "yyyy年MM月dd日") {
     return value.substring(value.length - length, value.length);
   }
 }
+//获取创建的类名
+export function getConstructorName(item) {
+  return Object.prototype.toString.call(item).slice(8, -1);
+}
+//深拷贝
+export function deepClone(origin, set = new Set()) {
+  //基本数据类型//和已经被copy过的数据，return
+  if (
+    typeof origin !== "object" ||
+    origin === null ||
+    origin === undefined ||
+    set.has(origin)
+  ) {
+    return origin;
+  }
+  //判断是否为date regexp 对象
+  if (origin instanceof Date || origin instanceof RegExp) {
+    return new origin.constructor(origin);
+  }
 
-export {
-  debounceWrap, //防抖包装函数
-  formatDate, //格式化传入的时间戳data对象
-};
+  set.add(origin); //copy之前添加将要被copy的对象，避免循环引用
+  //数组对象
+
+  if (Array.isArray(origin)) {
+    return origin.reduce((target, item, index) => {
+      target.push(deepClone(item), set);
+      return target;
+    }, origin.constructor());
+  }
+  //后面为普通的对象
+  return Object.entries(origin).reduce((target, [key, value]) => {
+    target[key] = deepClone(value, set);
+    return target;
+  }, new origin.constructor());
+}

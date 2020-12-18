@@ -28,6 +28,7 @@
       <br />
       <br />
     </Scroll>
+    <DetailBottomBar/>
   </div>
 </template>
 
@@ -39,6 +40,7 @@ import DetailShopInfoPage from "views/detail/childComponents/DetailShopInfoPage"
 import DetailInfo from "views/detail/childComponents/DetailInfo";
 import DetailParam from "views/detail/childComponents/DetailParam";
 import DetailRate from "views/detail/childComponents/DetailRate";
+import DetailBottomBar from "views/detail/childComponents/DetailBottomBar";
 
 import GoodsList from "components/content/goodsList/GoodsList.vue";
 import Scroll from "components/common/scroll/Scroll";
@@ -175,6 +177,7 @@ export default {
     DetailParam,
     DetailRate,
     GoodsList,
+    DetailBottomBar,
   },
 };
 </script>
@@ -191,7 +194,7 @@ export default {
     top: 44px;
     left: 0;
     right: 0;
-    bottom: 0;
+    bottom: 49PX;
     overflow: hidden;
   }
 }
