@@ -2,7 +2,8 @@ import axios from 'axios'
 
 export function requestDefault(config) {
   const getDefaultUrl = axios.create({
-    baseURL:'http://152.136.185.210:7878/api/m5'
+    /* 联系coder-why老师获取最新接口 */
+    baseURL:'null'
   })
   getDefaultUrl.interceptors.request.use(
     config=>{
