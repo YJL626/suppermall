@@ -11,10 +11,15 @@ export function requestCategoryListData() {
   });
 }
 export function requestCategoryItemData(maitKey) {
+  console.log(maitKey)
   return requestDefault({
+    
+    
     url: `/subcategory?maitKey=${maitKey}`,
   }).then((result) => {
     if (result.status > 199 && result.status < 300) {
+      console.log(result.data.data);
+      
       return result.data.data;
     }
   });

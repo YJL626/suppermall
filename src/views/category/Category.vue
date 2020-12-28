@@ -106,7 +106,8 @@ export default {
   methods: {
     async currentCategoryChange(index) {
       this.currentCategoryIndex = index; //先更新坐标，
-      this.requestCategoryCurrentItemData(); //获取数据
+      this.requestCategoryCurrentItemData(); //获取左侧列表数据
+      this.requesetCurrentGoodsList(); //获取商品数据
       this.$refs.scrollCPN.scrollTo(0, 0, 0);
       this.refresh();
     },
